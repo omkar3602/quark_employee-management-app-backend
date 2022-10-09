@@ -66,7 +66,12 @@ app.post('/employee/add', async (req, res) => {
             password: req.body.password,
             role: req.body.role
         })
-        res.json({ status: "ok" })
+
+        const user = await Employee.findOne({
+            email: req.body.email,
+            password: req.body.password,
+        })
+        res.json({ status: "ok", _id: user._id })
     }
     catch (err) {
         res.json({ status: 'error', error: err })
