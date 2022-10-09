@@ -30,7 +30,9 @@ router.route('/graph/:id').get((req, res) => {
             }
 
         });
-        res.json({ 'break': Number(break_count / 60), 'meeting': Number(meeting_count / 60), 'work': Number(work_count / 60) });
+        res.json({
+            'break': Number((break_count / 60).toFixed(1)), 'meeting': Number((meeting_count / 60).toFixed(1)), 'work': Number((work_count / 60).toFixed(1))
+        });
     }).catch(err => res.status(400).json('Error: ' + err));
 });
 
