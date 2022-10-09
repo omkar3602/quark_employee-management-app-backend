@@ -53,7 +53,26 @@ app.post('/employee/login', async (req, res) => {
     else {
         res.json({ status: "not ok" });
     }
-})
+});
+
+app.post('/employee/add', async (req, res) => {
+    try {
+        const employee = await Employee.create({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            department: req.body.department,
+            doj: req.body.doj,
+            password: req.body.password,
+            role: req.body.role
+        })
+        res.json({ status: "ok" })
+    }
+    catch (err) {
+        res.json({ status: 'error', error: err })
+    }
+
+});
 
 const tasksRouter = require('./routes/task');
 app.use('/task', tasksRouter);
