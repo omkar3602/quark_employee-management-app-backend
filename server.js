@@ -39,7 +39,7 @@ app.post('/employee/login', async (req, res) => {
             name: user.name,
             email: user.email,
             phone: user.phone,
-            role: req.body.role
+            role: user.role
         }, 'seceret123',
             { expiresIn: '5h' })
         if (user.role === "admin") {
@@ -48,7 +48,7 @@ app.post('/employee/login', async (req, res) => {
         else if (user.role === "emp") {
             adminFlag = 0;
         }
-        return res.json({ status: 'ok', user: token, isAdmin: adminFlag });
+        return res.json({ status: 'ok', user: token, _id: user._id, isAdmin: adminFlag });
     }
     else {
         res.json({ status: "not ok" });
